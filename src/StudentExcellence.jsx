@@ -131,41 +131,12 @@ export default function StudentExcellence() {
     };
 
     try {
-      var response = await fetch(
-        "https://updates2k21-node.herokuapp.com/login",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      ).then((res) => res.json());
-
-      if (response.message === "USER_NOT_EXIST") {
-        setAlert(true);
-        setAlertmsg("Seems like you are new. please sign up and try again.");
-      } else if (response.message === "LOGIN_SUCCESSFUL") {
-        sessionStorage.setItem("token", response.token);
-        setSuccess(true);
-        setAlertmsg("Congrats! you are logged in.");
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3000);
-        history.push("/");
-      } else if (response.message === "INVALID_PASSWORD") {
-        setAlert(true);
-        setAlertmsg("Invalid password");
-      } else {
-        setAlert(true);
-        setAlertmsg("Please try again later. or Contact Co-ordinators");
-      }
+      // form submission request is done here
     } catch {
       setAlert(true);
       setAlertmsg("Oops! Something went wrong.");
     }
-    console.log(response);
+    console.log(formData);
   }
 
   const lavel = [
@@ -195,7 +166,7 @@ export default function StudentExcellence() {
     { sponsor: "SCETAA" },
     { sponsor: "SCET" },
     { sponsor: "Computer Engineering Department" },
-  ]
+  ];
 
   return (
     <Container

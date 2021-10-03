@@ -1,5 +1,13 @@
 import React from "react";
-import { Button, Alert, TextField, CssBaseline, Link, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Alert,
+  TextField,
+  CssBaseline,
+  Link,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import { makeStyles } from "@mui/styles";
 import { Container } from "@mui/material";
@@ -66,11 +74,9 @@ export default function OrganizedEventEntry() {
   const [Outcomes, setOutcomes] = React.useState("");
   const [Remarks, setRemarks] = React.useState("");
 
-
   const [alertmsg, setAlertmsg] = React.useState("");
   const [alert, setAlert] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
-
 
   const history = useHistory();
 
@@ -83,7 +89,22 @@ export default function OrganizedEventEntry() {
   async function onSubmitHandler(e) {
     e.preventDefault();
 
-    if (TypeOfEvent === "" || Title === ""|| SponsoringBody === "" || ExpertName === "" || ExpertAffiliation === "" || ExpertEmail === "" || ExpertContact === "" || VanueOfEvent === "" || EventDuration === ""|| FacultyCoordinator === ""|| EventReport === "" || EventPicture === "" || Outcomes === "" || Remarks === "") {
+    if (
+      TypeOfEvent === "" ||
+      Title === "" ||
+      SponsoringBody === "" ||
+      ExpertName === "" ||
+      ExpertAffiliation === "" ||
+      ExpertEmail === "" ||
+      ExpertContact === "" ||
+      VanueOfEvent === "" ||
+      EventDuration === "" ||
+      FacultyCoordinator === "" ||
+      EventReport === "" ||
+      EventPicture === "" ||
+      Outcomes === "" ||
+      Remarks === ""
+    ) {
       setAlert(true);
       setAlertmsg("Fill required details.");
       return;
@@ -117,44 +138,15 @@ export default function OrganizedEventEntry() {
     };
 
     try {
-      var response = await fetch(
-        "https://updates2k21-node.herokuapp.com/login",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      ).then((res) => res.json());
-
-      if (response.message === "USER_NOT_EXIST") {
-        setAlert(true);
-        setAlertmsg("Seems like you are new. please sign up and try again.");
-      } else if (response.message === "LOGIN_SUCCESSFUL") {
-        sessionStorage.setItem("token", response.token);
-        setSuccess(true);
-        setAlertmsg("Congrats! you are logged in.");
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3000);
-        history.push("/");
-      } else if (response.message === "INVALID_PASSWORD") {
-        setAlert(true);
-        setAlertmsg("Invalid password");
-      } else {
-        setAlert(true);
-        setAlertmsg("Please try again later. or Contact Co-ordinators");
-      }
+      // form submission request is done here
     } catch {
       setAlert(true);
       setAlertmsg("Oops! Something went wrong.");
     }
-    console.log(response);
+    console.log(formData);
   }
 
-  const faculty = ["hiii","hello"]
+  const faculty = ["hiii", "hello"];
   return (
     <Container
       component="main"
@@ -174,27 +166,28 @@ export default function OrganizedEventEntry() {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-
-          <Grid item xs={12}>
-            <Box>
-              <FormControl fullWidth required>
-                <InputLabel id="type-of-event-label">
-                Type of the Event 
-                </InputLabel>
-                <Select
-                  labelId="type-of-event-label"
-                  id="type-of-event"
-                  value={TypeOfEvent}
-                  label="Type of the Event"
-                  onChange={(event) => {
-                    setTypeOfEvent(event.target.value)}
-                  }
-                >
-                  <MenuItem value={"Expert Talk / Guest Lecture"}>Expert Talk / Guest Lecture</MenuItem>
-                  <MenuItem value={"Workshop"}>Workshop</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+            <Grid item xs={12}>
+              <Box>
+                <FormControl fullWidth required>
+                  <InputLabel id="type-of-event-label">
+                    Type of the Event
+                  </InputLabel>
+                  <Select
+                    labelId="type-of-event-label"
+                    id="type-of-event"
+                    value={TypeOfEvent}
+                    label="Type of the Event"
+                    onChange={(event) => {
+                      setTypeOfEvent(event.target.value);
+                    }}
+                  >
+                    <MenuItem value={"Expert Talk / Guest Lecture"}>
+                      Expert Talk / Guest Lecture
+                    </MenuItem>
+                    <MenuItem value={"Workshop"}>Workshop</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
             </Grid>
 
             <Grid item xs={12}>
@@ -209,33 +202,36 @@ export default function OrganizedEventEntry() {
               />
             </Grid>
 
-            
             <Grid item xs={12}>
-            <Box>
-              <FormControl fullWidth required>
-                <InputLabel id="sponsoring-body-label">
-                Sponsoring Body 
-                </InputLabel>
-                <Select
-                  labelId="sponsoring-body-label"
-                  id="sponsoring-body"
-                  value={SponsoringBody}
-                  label="Sponsoring Body"
-                  onChange={(event) => {
-                    setSponsoringBody(event.target.value)}
-                  }
-                >
-                  <MenuItem value={"Expert Talk / Guest Lecture"}>CSI Student Chapter</MenuItem>
-                  <MenuItem value={"ISTE"}>ISTE</MenuItem>
-                  <MenuItem value={"AICTE"}>AICTE</MenuItem>
-                  <MenuItem value={"MHRD"}>MHRD</MenuItem>
-                  <MenuItem value={"GUJCOST"}>GUJCOST</MenuItem>
-                  <MenuItem value={"SCETAA"}>SCETAA</MenuItem>
-                  <MenuItem value={"SCET"}>SCET</MenuItem>
-                  <MenuItem value={"Computer Engineering Department"}>Computer Engineering Department</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+              <Box>
+                <FormControl fullWidth required>
+                  <InputLabel id="sponsoring-body-label">
+                    Sponsoring Body
+                  </InputLabel>
+                  <Select
+                    labelId="sponsoring-body-label"
+                    id="sponsoring-body"
+                    value={SponsoringBody}
+                    label="Sponsoring Body"
+                    onChange={(event) => {
+                      setSponsoringBody(event.target.value);
+                    }}
+                  >
+                    <MenuItem value={"Expert Talk / Guest Lecture"}>
+                      CSI Student Chapter
+                    </MenuItem>
+                    <MenuItem value={"ISTE"}>ISTE</MenuItem>
+                    <MenuItem value={"AICTE"}>AICTE</MenuItem>
+                    <MenuItem value={"MHRD"}>MHRD</MenuItem>
+                    <MenuItem value={"GUJCOST"}>GUJCOST</MenuItem>
+                    <MenuItem value={"SCETAA"}>SCETAA</MenuItem>
+                    <MenuItem value={"SCET"}>SCET</MenuItem>
+                    <MenuItem value={"Computer Engineering Department"}>
+                      Computer Engineering Department
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
             </Grid>
 
             <Grid item xs={12}>
@@ -311,31 +307,41 @@ export default function OrganizedEventEntry() {
             </Grid>
 
             <Grid item xs={12}>
-            <Box>
-              <FormControl fullWidth required>
-                <InputLabel id="Vanue-of-event-label">
-                Vanue of Event 
-                </InputLabel>
-                <Select
-                  labelId="Vanue-of-event-label"
-                  id="Vanue-of-event"
-                  value={VanueOfEvent}
-                  label="Vanue of the Event"
-                  onChange={(event) => {
-                    setVanueOfEvent(event.target.value)}
-                  }
-                >
-                  <MenuItem value={"Expert Talk / Guest Lecture"}>Class Rooms</MenuItem>
-                  <MenuItem value={"NJ Seminar Hall"}>NJ Seminar Hall</MenuItem>
-                  <MenuItem value={"EC Multimedia Room"}>EC Multimedia Room</MenuItem>
-                  <MenuItem value={"IC Multimedia Room"}>IC Multimedia Room</MenuItem>
-                  <MenuItem value={"Tifac Seminar Hall"}>Tifac Seminar Hall</MenuItem>
-                  <MenuItem value={"Taramoti Hall"}>Taramoti Hall</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+              <Box>
+                <FormControl fullWidth required>
+                  <InputLabel id="Vanue-of-event-label">
+                    Vanue of Event
+                  </InputLabel>
+                  <Select
+                    labelId="Vanue-of-event-label"
+                    id="Vanue-of-event"
+                    value={VanueOfEvent}
+                    label="Vanue of the Event"
+                    onChange={(event) => {
+                      setVanueOfEvent(event.target.value);
+                    }}
+                  >
+                    <MenuItem value={"Expert Talk / Guest Lecture"}>
+                      Class Rooms
+                    </MenuItem>
+                    <MenuItem value={"NJ Seminar Hall"}>
+                      NJ Seminar Hall
+                    </MenuItem>
+                    <MenuItem value={"EC Multimedia Room"}>
+                      EC Multimedia Room
+                    </MenuItem>
+                    <MenuItem value={"IC Multimedia Room"}>
+                      IC Multimedia Room
+                    </MenuItem>
+                    <MenuItem value={"Tifac Seminar Hall"}>
+                      Tifac Seminar Hall
+                    </MenuItem>
+                    <MenuItem value={"Taramoti Hall"}>Taramoti Hall</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
             </Grid>
-            
+
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -349,26 +355,26 @@ export default function OrganizedEventEntry() {
             </Grid>
 
             <Grid item xs={12}>
-            <Box>
-              <FormControl fullWidth required>
-                <InputLabel id="faculty-coordinator-label">
-                Name of The Faculty Co-ordinator 
-                </InputLabel>
-                <Select
-                  labelId="faculty-coordinator-label"
-                  id="faculty-coordinator"
-                  value={FacultyCoordinator}
-                  label="Name of The Faculty Co-ordinator"
-                  onChange={(event) => {
-                    setFacultyCoordinator(event.target.value)}
-                  }
-                >
-                  {
-                    faculty.map((val) =>{return(<MenuItem value={val}>{val}</MenuItem>)})
-                  }
+              <Box>
+                <FormControl fullWidth required>
+                  <InputLabel id="faculty-coordinator-label">
+                    Name of The Faculty Co-ordinator
+                  </InputLabel>
+                  <Select
+                    labelId="faculty-coordinator-label"
+                    id="faculty-coordinator"
+                    value={FacultyCoordinator}
+                    label="Name of The Faculty Co-ordinator"
+                    onChange={(event) => {
+                      setFacultyCoordinator(event.target.value);
+                    }}
+                  >
+                    {faculty.map((val) => {
+                      return <MenuItem value={val}>{val}</MenuItem>;
+                    })}
                   </Select>
-              </FormControl>
-            </Box>
+                </FormControl>
+              </Box>
             </Grid>
 
             <Grid item xs={12}>
@@ -376,18 +382,42 @@ export default function OrganizedEventEntry() {
                 accept=".pdf"
                 style={{ display: "none" }}
                 id="EventReport"
-                onChange={(e) => {setEventReport(e.target.files[0])}}
+                onChange={(e) => {
+                  setEventReport(e.target.files[0]);
+                }}
                 type="file"
               />
-              <InputLabel htmlFor="EventReport" style={{height:"55px",border:"solid",borderColor:"rgb(179 175 175 / 60%)",borderRadius:"4px",borderWidth:"thin"}}>
-                <IconButton color="primary" component="span" style={{marginTop:"7px"}}>
+              <InputLabel
+                htmlFor="EventReport"
+                style={{
+                  height: "55px",
+                  border: "solid",
+                  borderColor: "rgb(179 175 175 / 60%)",
+                  borderRadius: "4px",
+                  borderWidth: "thin",
+                }}
+              >
+                <IconButton
+                  color="primary"
+                  component="span"
+                  style={{ marginTop: "7px" }}
+                >
                   <UploadIcon />
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Report of the Event
                   </span>
                 </IconButton>
               </InputLabel>
-              <p style={{color:"red",marginTop:"0px", fontSize:"12px",marginLeft:"10px"}}>Files Should in .pdf format</p>
+              <p
+                style={{
+                  color: "red",
+                  marginTop: "0px",
+                  fontSize: "12px",
+                  marginLeft: "10px",
+                }}
+              >
+                Files Should in .pdf format
+              </p>
             </Grid>
 
             <Grid item xs={12}>
@@ -395,20 +425,43 @@ export default function OrganizedEventEntry() {
                 accept="image/*"
                 style={{ display: "none" }}
                 id="EventPicture"
-                onChange={(e) => {setEventPicture(e.target.files[0])}}
+                onChange={(e) => {
+                  setEventPicture(e.target.files[0]);
+                }}
                 type="file"
               />
-              <InputLabel htmlFor="EventPicture" style={{height:"55px",border:"solid",borderColor:"rgb(179 175 175 / 60%)",borderRadius:"4px",borderWidth:"thin"}}>
-                <IconButton color="primary" component="span" style={{marginTop:"7px"}}>
+              <InputLabel
+                htmlFor="EventPicture"
+                style={{
+                  height: "55px",
+                  border: "solid",
+                  borderColor: "rgb(179 175 175 / 60%)",
+                  borderRadius: "4px",
+                  borderWidth: "thin",
+                }}
+              >
+                <IconButton
+                  color="primary"
+                  component="span"
+                  style={{ marginTop: "7px" }}
+                >
                   <UploadIcon />
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Picture of the Event
                   </span>
                 </IconButton>
               </InputLabel>
-              <p style={{color:"red",marginTop:"0px", fontSize:"12px",marginLeft:"10px"}}>Files Should in .jpg/.jpeg format</p>
+              <p
+                style={{
+                  color: "red",
+                  marginTop: "0px",
+                  fontSize: "12px",
+                  marginLeft: "10px",
+                }}
+              >
+                Files Should in .jpg/.jpeg format
+              </p>
             </Grid>
-
 
             <Grid item xs={12}>
               <TextField
@@ -437,7 +490,6 @@ export default function OrganizedEventEntry() {
                 onChange={(e) => setRemarks(e.target.value)}
               />
             </Grid>
-
           </Grid>
 
           <Button

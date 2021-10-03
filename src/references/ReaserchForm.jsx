@@ -14,7 +14,6 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: 8,
@@ -28,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     marginTop: 10,
-},
+  },
 }));
 
 const filter = createFilterOptions();
@@ -76,46 +75,46 @@ const ReaserchForm = () => {
     setIssueNo(event.target.value);
   };
 
-  const validateForm = () =>{
-    if(Publisher === ""){
-      setFormvalidate(false)
+  const validateForm = () => {
+    if (Publisher === "") {
+      setFormvalidate(false);
     }
-    if(PublishedIn === ""){
-      setFormvalidate(false)
+    if (PublishedIn === "") {
+      setFormvalidate(false);
     }
-    if(Title === ""){
-      setFormvalidate(false)
+    if (Title === "") {
+      setFormvalidate(false);
     }
-    if(Department === null){
-      setFormvalidate(false)
+    if (Department === null) {
+      setFormvalidate(false);
     }
-    if(Conference === null){
-      setFormvalidate(false)
+    if (Conference === null) {
+      setFormvalidate(false);
     }
-    if(ISSN === null){
-      setFormvalidate(false)
+    if (ISSN === null) {
+      setFormvalidate(false);
     }
-    if(PublishedIn === "Journal"){
-      if(ImpactFactor === null){
-        setFormvalidate(false)
+    if (PublishedIn === "Journal") {
+      if (ImpactFactor === null) {
+        setFormvalidate(false);
       }
-      if(VolumeNo === null){
-        setFormvalidate(false)
+      if (VolumeNo === null) {
+        setFormvalidate(false);
       }
-      if(IssueNo === null){
-        setFormvalidate(false)
+      if (IssueNo === null) {
+        setFormvalidate(false);
       }
     }
-    return(Formvalidate)
-  }
+    return Formvalidate;
+  };
 
   const SubmitHandler = (event) => {
-    event.preventDefault()
-    if(validateForm()){
-      alert("form is submitted")
+    event.preventDefault();
+    if (validateForm()) {
+      alert("form is submitted");
       console.log(Information);
-    }else{
-      alert("please fill all required fields")
+    } else {
+      alert("please fill all required fields");
     }
     setPublishedIn("");
     setDepartment("");
@@ -138,11 +137,11 @@ const ReaserchForm = () => {
     conferencename: Conference,
     volumenumber: VolumeNo,
     issnnumber: ISSN,
-    issuenumber: IssueNo
+    issuenumber: IssueNo,
   };
 
   // total 5 lavels
-  const publishers = ["National","Inter National"];
+  const publishers = ["National", "Inter National"];
 
   return (
     <>
@@ -215,9 +214,8 @@ const ReaserchForm = () => {
               rows={2}
               value={Title}
               onChange={handleChangeTitle}
-              style={{width:"100%"}}
+              style={{ width: "100%" }}
             />
-
 
             <br />
             <br />
@@ -227,7 +225,7 @@ const ReaserchForm = () => {
               label="Conference Name"
               value={Conference}
               onChange={handleChangeConference}
-              style={{width:"100%"}}
+              style={{ width: "100%" }}
             />
 
             <br />
@@ -246,7 +244,7 @@ const ReaserchForm = () => {
                 }
               }}
               filterOptions={(options, params) => {
-                console.log(params)
+                console.log(params);
                 const filtered = filter(options, params);
 
                 const { inputValue } = params;
@@ -282,10 +280,11 @@ const ReaserchForm = () => {
               }}
               renderOption={(props, option) => <li {...props}>{option}</li>}
               freeSolo
-              renderInput={(params) => <TextField {...params} label="Publisher" />}
+              renderInput={(params) => (
+                <TextField {...params} label="Publisher" />
+              )}
             />
 
-           
             <br />
             <br />
             <TextField
@@ -294,48 +293,48 @@ const ReaserchForm = () => {
               label="ISSN Number"
               value={ISSN}
               onChange={handleChangeISSN}
-              style={{width:"100%"}}
+              style={{ width: "100%" }}
             />
 
             <br />
             <br />
-            {
-              (PublishedIn === "Journal")&&<div>
+            {PublishedIn === "Journal" && (
+              <div>
                 <TextField
-              required
-              id="ImpactFactor"
-              label="Impact Factor"
-              value={ImpactFactor}
-              onChange={handleChangeImpactFactor}
-              style={{width:"100%"}}
-            />
-            <br />
-            <br />
-            <TextField
-              required
-              id="VolumeNo"
-              label="Volume No"
-              value={VolumeNo}
-              onChange={handleChangeVolumeNo}
-              style={{width:"100%"}}
-            />
-            <br />
-            <br />
-            <TextField
-              required
-              id="IssueNo"
-              label="Issue No"
-              value={IssueNo}
-              onChange={handleChangeIssueNo}
-              style={{width:"100%"}}
-            />
-            <br />
-            <br />
+                  required
+                  id="ImpactFactor"
+                  label="Impact Factor"
+                  value={ImpactFactor}
+                  onChange={handleChangeImpactFactor}
+                  style={{ width: "100%" }}
+                />
+                <br />
+                <br />
+                <TextField
+                  required
+                  id="VolumeNo"
+                  label="Volume No"
+                  value={VolumeNo}
+                  onChange={handleChangeVolumeNo}
+                  style={{ width: "100%" }}
+                />
+                <br />
+                <br />
+                <TextField
+                  required
+                  id="IssueNo"
+                  label="Issue No"
+                  value={IssueNo}
+                  onChange={handleChangeIssueNo}
+                  style={{ width: "100%" }}
+                />
+                <br />
+                <br />
               </div>
-            }
+            )}
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-            {/* <DatePicker
+              {/* <DatePicker
           disableFuture
           label="Responsive"
           openTo="year"
@@ -344,7 +343,7 @@ const ReaserchForm = () => {
           onChange={handleChangeDate}
           renderInput={(params) => <TextField {...params} />}
         /> */}
-         <DesktopDatePicker
+              <DesktopDatePicker
                 label="Event Date"
                 value={PublicationYear}
                 minDate={new Date("2017-01-01")}
@@ -353,12 +352,16 @@ const ReaserchForm = () => {
               />
             </LocalizationProvider>
             <br />
-            <Button type="submit"
-                        fullWidth
-                        onClick={(e) => SubmitHandler(e)}
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}>Submit</Button>
+            <Button
+              type="submit"
+              fullWidth
+              onClick={(e) => SubmitHandler(e)}
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Submit
+            </Button>
           </form>
         </div>
       </Container>

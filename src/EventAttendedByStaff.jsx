@@ -71,7 +71,6 @@ export default function EventAttendedByStaff() {
   const [Outcomes, setOutcomes] = React.useState("");
   const [Remarks, setRemarks] = React.useState("");
 
-
   const [alertmsg, setAlertmsg] = React.useState("");
   const [alert, setAlert] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
@@ -125,48 +124,42 @@ export default function EventAttendedByStaff() {
     };
 
     try {
-      var response = await fetch(
-        "https://updates2k21-node.herokuapp.com/login",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      ).then((res) => res.json());
-
-      if (response.message === "USER_NOT_EXIST") {
-        setAlert(true);
-        setAlertmsg("Seems like you are new. please sign up and try again.");
-      } else if (response.message === "LOGIN_SUCCESSFUL") {
-        sessionStorage.setItem("token", response.token);
-        setSuccess(true);
-        setAlertmsg("Congrats! you are logged in.");
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3000);
-        history.push("/");
-      } else if (response.message === "INVALID_PASSWORD") {
-        setAlert(true);
-        setAlertmsg("Invalid password");
-      } else {
-        setAlert(true);
-        setAlertmsg("Please try again later. or Contact Co-ordinators");
-      }
+      // form submission request is done here
     } catch {
       setAlert(true);
       setAlertmsg("Oops! Something went wrong.");
     }
-    console.log(response);
+    console.log(formData);
   }
 
-  console.log(Certificate)
+  console.log(Certificate);
 
-  const faculty = ["hiii", "hello"];
+  const faculty = [
+    "prof. (Dr.) Keyur Rana",
+    "prof. (Dr.) Pariza Kamboj",
+    "prof. (Dr.) Mayuri Mehta",
+    "prof. Dipali Kasat",
+    "prof. Snehal Gandhi",
+    "prof. Bintu Kadhiwala",
+    "prof. Urmi Desai",
+    "prof. Bhumika Shah",
+    "prof. Jaydeep Gheewala",
+    "prof. Jayesh Chaudhari",
+    "prof. Rakesh Patel",
+    "prof. Dhatri Pandya",
+    "prof. Bhavesh Patel",
+    "prof. Purvi Rekh",
+    "prof. Vasundhara Uchhala",
+    "prof. Jaydeep Barad",
+    "prof. Fagun Vankawala",
+    "prof. (Dr.) Nirali Nanavati",
+    "prof. Vandana Joshi",
+    "Ms. Urvashi Mistry",
+    "Ms. Karuna Patel",
+    "Ms. Mitisha Patel"
+  ];
 
-  const faculty_dasignation = ["1", "2", "3"];
+  const faculty_dasignation = ["Professor", "Associate Professor", "Assistant Professor","Adhoc Assistant Professor","Lab Assistant","Adhoc Lab Assistant"];
 
   return (
     <Container
@@ -357,18 +350,42 @@ export default function EventAttendedByStaff() {
                 accept="image/*,.pdf"
                 style={{ display: "none" }}
                 id="Certificate"
-                onChange={(e) => {setCertificate(e.target.files[0])}}
+                onChange={(e) => {
+                  setCertificate(e.target.files[0]);
+                }}
                 type="file"
               />
-              <InputLabel htmlFor="Certificate" style={{height:"55px",border:"solid",borderColor:"rgb(179 175 175 / 60%)",borderRadius:"4px",borderWidth:"thin"}}>
-                <IconButton color="primary" component="span" style={{marginTop:"7px"}}>
+              <InputLabel
+                htmlFor="Certificate"
+                style={{
+                  height: "55px",
+                  border: "solid",
+                  borderColor: "rgb(179 175 175 / 60%)",
+                  borderRadius: "4px",
+                  borderWidth: "thin",
+                }}
+              >
+                <IconButton
+                  color="primary"
+                  component="span"
+                  style={{ marginTop: "7px" }}
+                >
                   <UploadIcon />
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Certificate of Event
                   </span>
                 </IconButton>
               </InputLabel>
-              <p style={{color:"red",marginTop:"0px", fontSize:"12px",marginLeft:"10px"}}>Files Should in .jpg/.jpeg/.pdf format</p>
+              <p
+                style={{
+                  color: "red",
+                  marginTop: "0px",
+                  fontSize: "12px",
+                  marginLeft: "10px",
+                }}
+              >
+                Files Should in .jpg/.jpeg/.pdf format
+              </p>
             </Grid>
 
             <Grid item xs={12}>
@@ -398,9 +415,6 @@ export default function EventAttendedByStaff() {
                 onChange={(e) => setRemarks(e.target.value)}
               />
             </Grid>
-
-            
-
           </Grid>
           <Button
             type="submit"
@@ -408,7 +422,7 @@ export default function EventAttendedByStaff() {
             onClick={(e) => onSubmitHandler(e)}
             variant="contained"
             color="primary"
-            style={{marginTop:"10px"}}
+            style={{ marginTop: "10px" }}
           >
             Submit
           </Button>

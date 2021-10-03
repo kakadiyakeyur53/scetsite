@@ -58,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Innovation() {
   const classes = useStyles();
 
-
   const [TypeOfEvent, setTypeOfEvent] = React.useState("");
   const [Title, setTitle] = React.useState("");
   const [EventDate, setEventDate] = React.useState(new Date());
@@ -72,8 +71,6 @@ export default function Innovation() {
   const [Remarks, setRemarks] = React.useState("");
   const [Certificate, setCertificate] = React.useState("");
   const [EventPicture, setEventPicture] = React.useState("");
-
-
 
   const [alertmsg, setAlertmsg] = React.useState("");
   const [alert, setAlert] = React.useState(false);
@@ -91,13 +88,13 @@ export default function Innovation() {
     e.preventDefault();
 
     if (
-        TypeOfEvent === "" ||
-        Title === "" ||
-        SponsoringBody === "" ||
-        HostOrganization === "" ||
-        EventLavel === "" ||
-        EventVanue === "" ||
-        AwardDetails === "" ||
+      TypeOfEvent === "" ||
+      Title === "" ||
+      SponsoringBody === "" ||
+      HostOrganization === "" ||
+      EventLavel === "" ||
+      EventVanue === "" ||
+      AwardDetails === "" ||
       EventDuration === "" ||
       Outcomes === "" ||
       Remarks === "" ||
@@ -130,46 +127,22 @@ export default function Innovation() {
     };
 
     try {
-      var response = await fetch(
-        "https://updates2k21-node.herokuapp.com/login",
-        {
-          method: "POST",
-          headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      ).then((res) => res.json());
-
-      if (response.message === "USER_NOT_EXIST") {
-        setAlert(true);
-        setAlertmsg("Seems like you are new. please sign up and try again.");
-      } else if (response.message === "LOGIN_SUCCESSFUL") {
-        sessionStorage.setItem("token", response.token);
-        setSuccess(true);
-        setAlertmsg("Congrats! you are logged in.");
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3000);
-        history.push("/");
-      } else if (response.message === "INVALID_PASSWORD") {
-        setAlert(true);
-        setAlertmsg("Invalid password");
-      } else {
-        setAlert(true);
-        setAlertmsg("Please try again later. or Contact Co-ordinators");
-      }
+      // form submission request is done here
     } catch {
       setAlert(true);
       setAlertmsg("Oops! Something went wrong.");
     }
-    console.log(response);
+    console.log(formData);
   }
 
-  console.log(Certificate)
-
-  const lavel = ["National Lavel","Intercollage Lavel","Collage Lavel","Zonal Lavel","State Lavel","Department Lavel",]
+  const lavel = [
+    "National Lavel",
+    "Intercollage Lavel",
+    "Collage Lavel",
+    "Zonal Lavel",
+    "State Lavel",
+    "Department Lavel",
+  ];
 
   return (
     <Container
@@ -186,7 +159,7 @@ export default function Innovation() {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-        Innovation/New Initiatives
+          Innovation/New Initiatives
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -286,26 +259,24 @@ export default function Innovation() {
             </Grid>
 
             <Grid item xs={12}>
-            <Box>
-              <FormControl fullWidth required>
-                <InputLabel id="event-lavel-label">
-                Lavel of Event 
-                </InputLabel>
-                <Select
-                  labelId="event-lavel-label"
-                  id="event-lavel"
-                  value={EventLavel}
-                  label="Lavel of Event"
-                  onChange={(event) => {
-                    setEventLavel(event.target.value)}
-                  }
-                >
-                  {
-                    lavel.map((val) =>{return(<MenuItem value={val}>{val}</MenuItem>)})
-                  }
+              <Box>
+                <FormControl fullWidth required>
+                  <InputLabel id="event-lavel-label">Lavel of Event</InputLabel>
+                  <Select
+                    labelId="event-lavel-label"
+                    id="event-lavel"
+                    value={EventLavel}
+                    label="Lavel of Event"
+                    onChange={(event) => {
+                      setEventLavel(event.target.value);
+                    }}
+                  >
+                    {lavel.map((val) => {
+                      return <MenuItem value={val}>{val}</MenuItem>;
+                    })}
                   </Select>
-              </FormControl>
-            </Box>
+                </FormControl>
+              </Box>
             </Grid>
 
             <Grid item xs={12}>
@@ -333,7 +304,6 @@ export default function Innovation() {
                 onChange={(e) => setAwardDetails(e.target.value)}
               />
             </Grid>
-            
 
             <Grid item xs={12}>
               <TextField
@@ -347,7 +317,6 @@ export default function Innovation() {
               />
             </Grid>
 
-            
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -381,18 +350,42 @@ export default function Innovation() {
                 accept="image/*,.pdf"
                 style={{ display: "none" }}
                 id="Certificate"
-                onChange={(e) => {setCertificate(e.target.files[0])}}
+                onChange={(e) => {
+                  setCertificate(e.target.files[0]);
+                }}
                 type="file"
               />
-              <InputLabel htmlFor="Certificate" style={{height:"55px",border:"solid",borderColor:"rgb(179 175 175 / 60%)",borderRadius:"4px",borderWidth:"thin"}}>
-                <IconButton color="primary" component="span" style={{marginTop:"7px"}}>
+              <InputLabel
+                htmlFor="Certificate"
+                style={{
+                  height: "55px",
+                  border: "solid",
+                  borderColor: "rgb(179 175 175 / 60%)",
+                  borderRadius: "4px",
+                  borderWidth: "thin",
+                }}
+              >
+                <IconButton
+                  color="primary"
+                  component="span"
+                  style={{ marginTop: "7px" }}
+                >
                   <UploadIcon />
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Certificate of Event
                   </span>
                 </IconButton>
               </InputLabel>
-              <p style={{color:"red",marginTop:"0px", fontSize:"12px",marginLeft:"10px"}}>Files Should in .jpg/.jpeg/.pdf format</p>
+              <p
+                style={{
+                  color: "red",
+                  marginTop: "0px",
+                  fontSize: "12px",
+                  marginLeft: "10px",
+                }}
+              >
+                Files Should in .jpg/.jpeg/.pdf format
+              </p>
             </Grid>
 
             <Grid item xs={12}>
@@ -400,21 +393,43 @@ export default function Innovation() {
                 accept="image/*"
                 style={{ display: "none" }}
                 id="EventPicture"
-                onChange={(e) => {setEventPicture(e.target.files[0])}}
+                onChange={(e) => {
+                  setEventPicture(e.target.files[0]);
+                }}
                 type="file"
               />
-              <InputLabel htmlFor="EventPicture" style={{height:"55px",border:"solid",borderColor:"rgb(179 175 175 / 60%)",borderRadius:"4px",borderWidth:"thin"}}>
-                <IconButton color="primary" component="span" style={{marginTop:"7px"}}>
+              <InputLabel
+                htmlFor="EventPicture"
+                style={{
+                  height: "55px",
+                  border: "solid",
+                  borderColor: "rgb(179 175 175 / 60%)",
+                  borderRadius: "4px",
+                  borderWidth: "thin",
+                }}
+              >
+                <IconButton
+                  color="primary"
+                  component="span"
+                  style={{ marginTop: "7px" }}
+                >
                   <UploadIcon />
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Picture of the Event
                   </span>
                 </IconButton>
               </InputLabel>
-              <p style={{color:"red",marginTop:"0px", fontSize:"12px",marginLeft:"10px"}}>Files Should in .jpg/.jpeg format</p>
+              <p
+                style={{
+                  color: "red",
+                  marginTop: "0px",
+                  fontSize: "12px",
+                  marginLeft: "10px",
+                }}
+              >
+                Files Should in .jpg/.jpeg format
+              </p>
             </Grid>
-            
-
           </Grid>
           <Button
             type="submit"
@@ -422,7 +437,7 @@ export default function Innovation() {
             onClick={(e) => onSubmitHandler(e)}
             variant="contained"
             color="primary"
-            style={{marginTop:"10px"}}
+            style={{ marginTop: "10px" }}
           >
             Submit
           </Button>
