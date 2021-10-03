@@ -78,8 +78,6 @@ export default function OrganizedEventEntry() {
   const [alert, setAlert] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
 
-  const history = useHistory();
-
   React.useEffect(() => {
     setTimeout(() => {
       setAlert(false);
@@ -403,9 +401,16 @@ export default function OrganizedEventEntry() {
                   style={{ marginTop: "7px" }}
                 >
                   <UploadIcon />
+                  {(EventReport === "")?
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Report of the Event
-                  </span>
+                  </span>:<span style={{ fontSize: "16px", marginLeft: "10px",border: "solid",
+                  borderColor: "#1550c0",
+                  borderRadius: "4px",
+                  borderWidth: "medium",
+                  color: "red",padding:"1px 5px" }}>
+                  {EventReport.name}
+                  </span>}
                 </IconButton>
               </InputLabel>
               <p
@@ -446,9 +451,16 @@ export default function OrganizedEventEntry() {
                   style={{ marginTop: "7px" }}
                 >
                   <UploadIcon />
+                  {(EventPicture === "")?
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Picture of the Event
-                  </span>
+                  </span>:<span style={{ fontSize: "16px", marginLeft: "10px",border: "solid",
+                  borderColor: "#1550c0",
+                  borderRadius: "4px",
+                  borderWidth: "medium",
+                  color: "red",padding:"1px 5px" }}>
+                  {EventPicture.name}
+                  </span>}
                 </IconButton>
               </InputLabel>
               <p

@@ -134,7 +134,6 @@ export default function Conference() {
       ConferenceName: ConferenceName,
       ResearchPaper: ResearchPaper,
       Certificate: Certificate,
-      Certificate: Certificate,
       Outcomes: Outcomes,
       Remarks: Remarks,
     };
@@ -452,10 +451,18 @@ export default function Conference() {
                   style={{ marginTop: "7px" }}
                 >
                   <UploadIcon />
+                  {(ResearchPaper === "")?
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Attach Research Paper
-                  </span>
+                  </span>:<span style={{ fontSize: "16px", marginLeft: "10px",border: "solid",
+                  borderColor: "#1550c0",
+                  borderRadius: "4px",
+                  borderWidth: "thin",
+                  color: "red",padding:"1px 5px" }}>
+                  {ResearchPaper.name}
+                  </span>}
                 </IconButton>
+                
               </InputLabel>
               <p
                 style={{
@@ -486,7 +493,7 @@ export default function Conference() {
                   border: "solid",
                   borderColor: "rgb(179 175 175 / 60%)",
                   borderRadius: "4px",
-                  borderWidth: "thin",
+                  borderWidth: "medium",
                 }}
               >
                 <IconButton
@@ -495,9 +502,16 @@ export default function Conference() {
                   style={{ marginTop: "7px" }}
                 >
                   <UploadIcon />
+                  {(Certificate === "")?
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Attach Certificate
-                  </span>
+                  </span>:<span style={{ fontSize: "16px", marginLeft: "10px",border: "solid",
+                  borderColor: "#1550c0",
+                  borderRadius: "4px",
+                  borderWidth: "medium",
+                  color: "red",padding:"1px 5px" }}>
+                  {ResearchPaper.name}
+                  </span>}
                 </IconButton>
               </InputLabel>
               <p

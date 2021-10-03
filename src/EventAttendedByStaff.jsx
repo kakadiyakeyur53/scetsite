@@ -371,9 +371,16 @@ export default function EventAttendedByStaff() {
                   style={{ marginTop: "7px" }}
                 >
                   <UploadIcon />
+                  {(Certificate === "")?
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Certificate of Event
-                  </span>
+                  </span>:<span style={{ fontSize: "16px", marginLeft: "10px",border: "solid",
+                  borderColor: "#1550c0",
+                  borderRadius: "4px",
+                  borderWidth: "medium",
+                  color: "red",padding:"1px 5px" }}>
+                  {Certificate.name}
+                  </span>}
                 </IconButton>
               </InputLabel>
               <p

@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: 3,
+    marginTop: "3px",
   },
 }));
 
@@ -461,9 +461,16 @@ export default function StudentExcellence() {
                   style={{ marginTop: "7px" }}
                 >
                   <UploadIcon />
+                  {(Certificate === "")?
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Certificate of Event
-                  </span>
+                  </span>:<span style={{ fontSize: "16px", marginLeft: "10px",border: "solid",
+                  borderColor: "#1550c0",
+                  borderRadius: "4px",
+                  borderWidth: "medium",
+                  color: "red",padding:"1px 5px" }}>
+                  {Certificate.name}
+                  </span>}
                 </IconButton>
               </InputLabel>
               <p
@@ -504,9 +511,16 @@ export default function StudentExcellence() {
                   style={{ marginTop: "7px" }}
                 >
                   <UploadIcon />
+                  {(EventPicture === "")?
                   <span style={{ fontSize: "16px", marginLeft: "10px" }}>
                     Picture of the Event
-                  </span>
+                  </span>:<span style={{ fontSize: "16px", marginLeft: "10px",border: "solid",
+                  borderColor: "#1550c0",
+                  borderRadius: "4px",
+                  borderWidth: "medium",
+                  color: "red",padding:"1px 5px" }}>
+                  {EventPicture.name}
+                  </span>}
                 </IconButton>
               </InputLabel>
               <p

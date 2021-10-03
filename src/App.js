@@ -1,6 +1,4 @@
 import React from "react";
-import Home from "./Home";
-import ReaserchForm from "./ReaserchForm";
 import OrganizedEventEntry from "./OrganizedEventEntry";
 import EventAttendedByStaff from "./EventAttendedByStaff";
 import Innovation from "./Innovation";
@@ -10,7 +8,7 @@ import Conference from "./Conference";
 
 function App() {
   return (
-    <Conference/>
+    <StudentExcellence/>
   );
 }
 
