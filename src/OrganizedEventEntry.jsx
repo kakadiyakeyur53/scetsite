@@ -114,6 +114,14 @@ export default function OrganizedEventEntry() {
       setAlert(true);
       setAlertmsg("Enter faculty participants number in Integer");
       return;
+    } else if (isNaN(ExpertContact) || ExpertContact.length !== 10) {
+      setAlert(true);
+      setAlertmsg("Enter valid mobile number");
+      return;
+    } else if (isNaN(EventDuration)) {
+      setAlert(true);
+      setAlertmsg("Enter event duration in digit");
+      return;
     }
 
     let formData = {
@@ -144,7 +152,30 @@ export default function OrganizedEventEntry() {
     console.log(formData);
   }
 
-  const faculty = ["hiii", "hello"];
+  const faculty = [
+    "prof. (Dr.) Keyur Rana",
+    "prof. (Dr.) Pariza Kamboj",
+    "prof. (Dr.) Mayuri Mehta",
+    "prof. Dipali Kasat",
+    "prof. Snehal Gandhi",
+    "prof. Bintu Kadhiwala",
+    "prof. Urmi Desai",
+    "prof. Bhumika Shah",
+    "prof. Jaydeep Gheewala",
+    "prof. Jayesh Chaudhari",
+    "prof. Rakesh Patel",
+    "prof. Dhatri Pandya",
+    "prof. Bhavesh Patel",
+    "prof. Purvi Rekh",
+    "prof. Vasundhara Uchhala",
+    "prof. Jaydeep Barad",
+    "prof. Fagun Vankawala",
+    "prof. (Dr.) Nirali Nanavati",
+    "prof. Vandana Joshi",
+    "Ms. Urvashi Mistry",
+    "Ms. Karuna Patel",
+    "Ms. Mitisha Patel"
+  ];
   return (
     <Container
       component="main"

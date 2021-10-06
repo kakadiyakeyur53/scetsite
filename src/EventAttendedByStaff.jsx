@@ -106,6 +106,10 @@ export default function EventAttendedByStaff() {
       setAlert(true);
       setAlertmsg("Enter faculty participants number in Integer");
       return;
+    } else if (isNaN(EventDuration)) {
+      setAlert(true);
+      setAlertmsg("Enter event duration in digit");
+      return;
     }
 
     let formData = {

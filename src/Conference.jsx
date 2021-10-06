@@ -114,7 +114,15 @@ export default function Conference() {
       return;
     } else if (isNaN(ISBN)) {
       setAlert(true);
-      setAlertmsg("Enter faculty participants number in Integer");
+      setAlertmsg("Enter valid ISBN Number");
+      return;
+    } else if (isNaN(IndexedAt)) {
+      setAlert(true);
+      setAlertmsg("indexed at should be in integer");
+      return;
+    } else if (isNaN(ImpactFactor)) {
+      setAlert(true);
+      setAlertmsg("impact factor should be Integer");
       return;
     }
 
